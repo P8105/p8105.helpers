@@ -4,7 +4,6 @@
 #'
 #' @return
 #'
-#' @import gmailr
 #' @export
 #'
 #' @examples
@@ -17,7 +16,7 @@ Your grade for %s is %s.
 
 Points and commments for each problem are in the attached CSV.
 
-If you have questions, please contact Jeff soon.
+If you have questions, please contact Jeff directly (and soon).
 
 "
 
@@ -36,8 +35,8 @@ If you have questions, please contact Jeff soon.
       body = sprintf(body, assignment, total),
       attachment = paste0("./p8105_", assignment, "/comments/", uni, ".csv")) %>%
     select(To, From, Subject, body, attachment) %>%
-    pmap(email_create) %>%
-    map(safe_send_message)
+    pmap(email_create()) %>%
+    map(safe_send_message())
 
 }
 

@@ -6,11 +6,13 @@
 #' @param body
 #' @param attachment
 #'
+#' @import gmailr
+#'
 #' @return
 #' @export
 #'
-#' @examples
 email_create = function(To, From, Subject, body, attachment){
+
   mime() %>%
     from(From) %>%
     to(To) %>%
@@ -18,4 +20,5 @@ email_create = function(To, From, Subject, body, attachment){
     html_body(body) %>%
     attach_part(body) %>%
     attach_file(filename = attachment)
+
 }
