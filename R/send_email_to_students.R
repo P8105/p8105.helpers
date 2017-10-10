@@ -35,8 +35,8 @@ If you have questions, please contact Jeff directly (and soon).
       body = sprintf(body, assignment, total),
       attachment = paste0("./p8105_", assignment, "/comments/", uni, ".csv")) %>%
     select(To, From, Subject, body, attachment) %>%
-    pmap(email_create()) %>%
-    map(safe_send_message())
+    pmap(email_create) %>%
+    map(safe_send_message)
 
 }
 

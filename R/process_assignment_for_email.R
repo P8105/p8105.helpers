@@ -11,7 +11,8 @@
 #'
 process_assignment_for_email = function(sheet) {
 
-  t = sheet %>%
+  tidy_sheet =
+    sheet %>%
     clean_names() %>%
     select(assignment, uni = sis_login_id, starts_with("problem")) %>%
     gather(key = problem, value = value, contains("problem")) %>%
@@ -20,8 +21,14 @@ process_assignment_for_email = function(sheet) {
     spread(key = type, value = value) %>%
     mutate(comments = replace(comments, is.na(comments), ""),
            problem = paste0("problem_", problem)) %>%
-    select(assignment, uni, problem, points, comments) %>%
-    nest(-(assignment:uni)) %>%
+    select(assignment, uni, problem, points, comments)
+
+  nested_sheet =
+    tidy_sheet %>%
+    nest(-(assignment:uni))
+
+  written_comments =
+    nested_sheet %>%
     pmap(write_comment_csv)
 
   sheet
