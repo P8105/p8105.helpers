@@ -9,6 +9,12 @@
 #' @examples
 send_emails_to_students = function(sheet){
 
+  response = readline("Type 'send' to send emails to students. ")
+
+  if (response != "send") {
+    stop("Try again when you're ready! \n")
+  }
+
   safe_send_message = safely(send_message)
   body = "Hello,
 
@@ -20,8 +26,6 @@ If you have questions, please contact Jeff directly (and soon).
 
 "
 
-
-  ## export emails to csv?
   ## how to handle return object?
 
   sheet %>%
