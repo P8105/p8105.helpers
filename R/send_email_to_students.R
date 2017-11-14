@@ -15,6 +15,8 @@ send_emails_to_students = function(sheet){
     stop("Try again when you're ready! \n")
   }
 
+  path_to_export_csv = paste0("./p8105_", unique(sheet$assignment), "/emails.csv")
+
   safe_send_message = safely(send_message)
   body = "Hello,
 
@@ -28,7 +30,7 @@ If you have questions, please contact Jeff directly (and soon).
 
   ## how to handle return object?
 
-  sheet %>%
+  email_df = sheet %>%
     clean_names() %>%
     rename(uni = sis_login_id) %>%
     mutate(
@@ -38,7 +40,11 @@ If you have questions, please contact Jeff directly (and soon).
       Subject = sprintf('Grade for p8105_%s', assignment),
       body = sprintf(body, assignment, total),
       attachment = paste0("./p8105_", assignment, "/comments/", uni, ".csv")) %>%
-    select(To, From, Subject, body, attachment) %>%
+    select(To, From, Subject, body, attachment)
+
+  write_csv(email_df, path = path_to_export_csv)
+
+  email_df %>%
     pmap(email_create) %>%
     map(safe_send_message)
 
