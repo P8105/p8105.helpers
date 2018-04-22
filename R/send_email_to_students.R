@@ -11,10 +11,6 @@ send_emails_to_students = function(sheet){
 
   response = readline("Type 'send' to send emails to students. ")
 
-  if (response != "send") {
-    stop("Try again when you're ready! \n")
-  }
-
   path_to_export_csv = paste0("./p8105_", unique(sheet$assignment), "/emails.csv")
 
   safe_send_message = safely(send_message)
@@ -44,9 +40,13 @@ If you have questions, please contact Jeff directly (and soon).
 
   write_csv(email_df, path = path_to_export_csv)
 
-  email_df %>%
-    pmap(email_create) %>%
-    map(safe_send_message)
+  if (response != "send") {
+    stop("Try again when you're ready! \n")
+  }
+
+#  email_df %>%
+#    pmap(email_create) %>%
+#    map(safe_send_message)
 
 }
 
