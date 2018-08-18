@@ -18,7 +18,7 @@ send_emails_to_students = function(sheet){
 
 Your grade for %s is %s.
 
-Points and commments for each problem are in the attached CSV.
+Points and comments for each problem are in the attached CSV.
 
 If you have questions, please contact Jeff directly (and soon).
 
@@ -32,7 +32,7 @@ If you have questions, please contact Jeff directly (and soon).
     mutate(
       email = paste0(uni, "@cumc.columbia.edu"),
       To = email,
-      From = "DSI <dsi.cubiostat@gmail.com>",
+      From = "P8105 <bst.p8105@gmail.com>",
       Subject = sprintf('Grade for p8105_%s', assignment),
       body = sprintf(body, assignment, total),
       attachment = paste0("./p8105_", assignment, "/comments/", uni, ".csv")) %>%
@@ -44,9 +44,9 @@ If you have questions, please contact Jeff directly (and soon).
     stop("Try again when you're ready! \n")
   }
 
-#  email_df %>%
-#    pmap(email_create) %>%
-#    map(safe_send_message)
+  email_df %>%
+    pmap(email_create) %>%
+    map(safe_send_message)
 
 }
 
