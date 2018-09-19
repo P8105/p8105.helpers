@@ -6,7 +6,6 @@
 #'
 #' @import tidyverse
 #' @importFrom janitor clean_names
-#' @importFrom readxl read_excel
 #' @export
 #'
 process_assignment_for_email = function(sheet) {
