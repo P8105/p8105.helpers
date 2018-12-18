@@ -20,7 +20,7 @@ Your grade for %s is %s.
 
 Points and comments for each problem are in the attached CSV.
 
-If you have questions, please contact Jeff directly (and soon).
+If you have questions, please email Jeff directly (and soon) with a detailed description of your concern.
 
 "
 

@@ -17,6 +17,8 @@ process_assignment_for_email = function(sheet) {
     gather(key = problem, value = value, contains("problem")) %>%
     mutate(problem = stringr::str_replace(problem, "problem_", "")) %>%
     separate(problem, into = c("problem", "type"), "_") %>%
+    mutate(problem = as_factor(problem),
+           problem = fct_inorder(problem)) %>%
     spread(key = type, value = value) %>%
     mutate(comments = replace(comments, is.na(comments), ""),
            problem = paste0("problem_", problem)) %>%
