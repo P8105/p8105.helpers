@@ -11,7 +11,7 @@ send_emails_to_students = function(sheet){
 
   response = readline("Type 'send' to send emails to students. ")
 
-  path_to_export_csv = paste0("./p8105_", unique(sheet$assignment), "/emails.csv")
+  path_to_export_csv = paste0("./emails/p8105_", unique(sheet$assignment), "/emails.csv")
 
   safe_send_message = safely(send_message)
   body = "Hello,
