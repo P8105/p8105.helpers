@@ -7,10 +7,9 @@
 #'
 #' @examples
 initialize_assignment = function(grade_spreadsheet = "p8105_grades.xlsx", assignment) {
-  assignment_name = paste0("emails/p8105_", assignment)
 
-  dir.create(paste0("./emails/", assignment_name))
-  dir.create(paste0("./emails/", assignment_name, "/comments"))
+  fs::dir_create(here::here("emails", stringr::str_c("p8105_", assignment)))
+  fs::dir_create(here::here("emails", stringr::str_c("p8105_", assignment), "comments"))
 
   sheet = read_excel(grade_spreadsheet, sheet = assignment) %>%
     filter(!is.na(ID)) %>%

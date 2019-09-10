@@ -12,7 +12,7 @@ process_assignment_for_email = function(sheet) {
 
   tidy_sheet =
     sheet %>%
-    clean_names() %>%
+    janitor::clean_names() %>%
     select(assignment, uni = sis_login_id, starts_with("problem")) %>%
     gather(key = problem, value = value, contains("problem")) %>%
     mutate(problem = stringr::str_replace(problem, "problem_", "")) %>%
@@ -22,7 +22,8 @@ process_assignment_for_email = function(sheet) {
     spread(key = type, value = value) %>%
     mutate(comments = replace(comments, is.na(comments), ""),
            problem = paste0("problem_", problem)) %>%
-    select(assignment, uni, problem, points, comments)
+    select(assignment, uni, problem, points, comments) %>%
+    drop_na(points)
 
   nested_sheet =
     tidy_sheet %>%
