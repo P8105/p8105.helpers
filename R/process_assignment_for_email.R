@@ -14,12 +14,18 @@ process_assignment_for_email = function(sheet) {
     sheet %>%
     janitor::clean_names() %>%
     select(assignment, uni = sis_login_id, starts_with("problem")) %>%
-    gather(key = problem, value = value, contains("problem")) %>%
-    mutate(problem = stringr::str_replace(problem, "problem_", "")) %>%
+    map_df(as.character) %>%
+    pivot_longer(
+      contains("problem"),
+      names_to = "problem",
+      names_prefix = "problem_",
+      values_to = "value") %>%
     separate(problem, into = c("problem", "type"), "_") %>%
     mutate(problem = as_factor(problem),
            problem = fct_inorder(problem)) %>%
-    spread(key = type, value = value) %>%
+    pivot_wider(
+      names_from = type,
+      values_from = value) %>%
     mutate(comments = replace(comments, is.na(comments), ""),
            problem = paste0("problem_", problem)) %>%
     select(assignment, uni, problem, points, comments) %>%
@@ -27,7 +33,7 @@ process_assignment_for_email = function(sheet) {
 
   nested_sheet =
     tidy_sheet %>%
-    nest(-(assignment:uni))
+    nest(data = c(problem, points, comments))
 
   written_comments =
     nested_sheet %>%
