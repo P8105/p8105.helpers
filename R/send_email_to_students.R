@@ -13,7 +13,8 @@ send_emails_to_students = function(sheet){
 
   path_to_export_csv = stringr::str_c("./emails/p8105_", unique(sheet$assignment), "/emails.csv")
 
-  safe_send_message = safely(send_message)
+
+
   body = "Hello,
 
 Your grade for %s is %s.
@@ -32,7 +33,6 @@ Replies to this email will not be checked.
     clean_names() %>%
     rename(uni = sis_login_id) %>%
     mutate(
-      email = paste0(uni, "@cumc.columbia.edu"),
       To = email,
       From = "P8105 <bst.p8105@gmail.com>",
       Subject = sprintf('Grade for p8105_%s', assignment),
@@ -48,7 +48,7 @@ Replies to this email will not be checked.
 
   email_df %>%
     pmap(email_create) %>%
-    map(safe_send_message)
+    map(p8105_send_message)
 
 }
 
