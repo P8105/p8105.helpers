@@ -10,7 +10,7 @@ p8105_send_message = function(message) {
     send_output = safe_gm_send_message(message)
 
     if (is.null(send_output$error)) {
-      message_sent == TRUE
+      message_sent = TRUE
     } else {
       Sys.sleep(runif(1))
     }
