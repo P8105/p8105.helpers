@@ -21,7 +21,7 @@ Your grade for %s is %s.
 
 Points and comments for each problem are in the attached CSV.
 
-If you have questions, please email Jeff, Erin, and Angel directly (and soon) with a detailed description of your concern.
+If you have questions, please email Jeff and Margaret directly (and soon) with a detailed description of your concern.
 
 Replies to this email will not be checked.
 
