@@ -9,7 +9,7 @@
 #'
 #' @examples
 write_comment_csv = function(assignment, uni, data) {
-  path = stringr::str_c("emails/p8105_", assignment, "/comments/", uni, ".csv")
-  write_csv(data, path)
+  file = stringr::str_c("emails/p8105_", assignment, "/comments/", uni, ".csv")
+  write_csv(data, file)
   return(NULL)
 }
