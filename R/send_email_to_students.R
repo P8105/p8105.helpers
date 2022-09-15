@@ -40,7 +40,7 @@ Replies to this email will not be checked.
       attachment = paste0("./emails/p8105_", assignment, "/comments/", uni, ".csv")) %>%
     select(To, From, Subject, body, attachment)
 
-  write_csv(email_df, path = path_to_export_csv)
+  write_csv(email_df, file = path_to_export_csv)
 
   if (response != "really send") {
     stop("Try again when you're ready! \n")
